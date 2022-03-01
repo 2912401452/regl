@@ -20,14 +20,18 @@ import React from 'react'
 // import MipMap from "./components/MipMap"
 // import Envmap from "./components/Envmap"
 // import Reflection from "./components/Reflection"
+// import Stencil from "./components/Stencil"
 // import Cubefbo from "./components/Cubefbo"
 // import Stenciltransition from "./components/Stenciltransition"
 // import Sprite from "./components/Sprite"
 // import TexAttr from './components/TexAttr'
-import Geomorph from './components/Geomorph'
+// import Geomorph from './components/Geomorph'
 
-import Scene from './render/Scene'
-import Plane from './components/Plane'
+// import Scene from './render/Scene'
+// import Plane from './components/Plane'
+// import PlaneGeometry from './components/PlaneGeometry';
+import SphereGeometry from './components/SphereGeometry';
+import Spark from './components/Sparks'
  export default class App extends React.Component {
 
   componentDidMount() {
@@ -68,11 +72,15 @@ import Plane from './components/Plane'
         {/* <MipMap/> */}
         {/* <Envmap/> */}
         {/* <Reflection/> */}
+        {/* <Stencil/> */}
         {/* <Cubefbo/> */}
         {/* <Stenciltransition/> */}
         {/* <Sprite/> */}
         {/* <TexAttr/> */}
-        <Geomorph/>
+        {/* <Geomorph/> */}
+        {/* <PlaneGeometry/> */}
+        {/* <SphereGeometry/> */}
+        <Spark/>
       </div>
     );
   }

@@ -81,32 +81,48 @@ const cubeElements = [
             }
         })
 
-        require("resl")({
-            manifest: {
-                texture: {
-                    type: 'image',
-                    src: img,
-                    // src: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhf.web.tedu.cn%2Fupload%2F20170608%2F20170608135206_259.jpg&refer=http%3A%2F%2Fhf.web.tedu.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1619532256&t=3704ff2b8a366c059054d16a06e08c79',
-                    parser: (data) => {
-                        console.log(data)
-                        return this.regl.texture({
-                            data: data,
-                            mag: 'linear',
-                            min: 'linear'
-                        })
-                    }
-                }
-            },
-            onDone: ({ texture }) => {
-                this.regl.frame(() => {
-                    this.regl.clear({
-                      color: [0, 0, 0, 255],
-                      depth: 1
-                    })
-                    drawCube({ texture })
+        let image = new Image()
+        image.src = img
+        image.onload = () => {
+            this.regl.frame(() => {
+                this.regl.clear({
+                  color: [0, 0, 0, 255],
+                  depth: 1
                 })
-            },
-        })
+                drawCube({ texture:  this.regl.texture({
+                    data: image,
+                    mag: 'linear',
+                    min: 'linear'
+                })})
+            })
+        }
+
+        // require("resl")({
+        //     manifest: {
+        //         texture: {
+        //             type: 'image',
+        //             src: img,
+        //             // src: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhf.web.tedu.cn%2Fupload%2F20170608%2F20170608135206_259.jpg&refer=http%3A%2F%2Fhf.web.tedu.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1619532256&t=3704ff2b8a366c059054d16a06e08c79',
+        //             parser: (data) => {
+        //                 console.log(data)
+        //                 return this.regl.texture({
+        //                     data: data,
+        //                     mag: 'linear',
+        //                     min: 'linear'
+        //                 })
+        //             }
+        //         }
+        //     },
+        //     onDone: ({ texture }) => {
+        //         this.regl.frame(() => {
+        //             this.regl.clear({
+        //               color: [0, 0, 0, 255],
+        //               depth: 1
+        //             })
+        //             drawCube({ texture })
+        //         })
+        //     },
+        // })
 
     }
     render() {

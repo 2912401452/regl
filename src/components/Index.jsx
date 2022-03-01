@@ -57,16 +57,59 @@ export default class Index extends React.Component {
     
             count: 3
         })
-        
-        this.regl.frame(() => {
-            this.regl.clear({
-                color: [0, 0, 0, 255],
-                depth: 1
-            })
-            draw()
 
-            camera.tick()
+        var m = mat4.identity([])
+      
+        mat4.translate(m, m, [1, 0, 0])
+
+        const draw2 = this.regl({
+            frag: `
+                precision mediump float;
+                uniform vec4 color;
+                void main () {
+                    gl_FragColor = color;
+                }`,
+    
+            vert: `
+                precision mediump float;
+                attribute vec2 position;
+
+                uniform mat4 proj;
+                uniform mat4 model;
+                uniform mat4 view;
+
+                void main () {
+                    gl_Position = proj * view * model * vec4(position, 0, 1);
+                }`,
+    
+            attributes: {
+                position: [
+                    [-1, 0],
+                    [0, -1],
+                    [1, 1]
+                ]
+            },
+    
+            uniforms: {
+                color: [1, 1, 0, 1],
+                proj: ({ viewportWidth, viewportHeight }) =>
+                mat4.perspective([],
+                  Math.PI / 2,
+                  viewportWidth / viewportHeight,
+                  0.01,
+                  1000),
+                model: m,
+                view: () => camera.view() 
+            },
+    
+            count: 3
         })
+
+      
+        var texFBO = this.regl.framebuffer(1)
+                
+        draw()
+        draw2()
     }
     render() {
         return (

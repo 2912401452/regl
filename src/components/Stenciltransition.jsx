@@ -102,11 +102,11 @@ export default class Stenciltransition extends React.Component {
                 texData.push(r)
             }
             // console.log(texData);
-            console.log(this.regl.texture({
-                mag: 'nearest',
-                wrap: 'repeat',
-                data: texData
-            }))
+            // console.log(this.regl.texture({
+            //     mag: 'nearest',
+            //     wrap: 'repeat',
+            //     data: texData
+            // }))
             return this.regl.texture({
                 mag: 'nearest',
                 wrap: 'repeat',
@@ -240,15 +240,16 @@ export default class Stenciltransition extends React.Component {
             count: 3
         })
         
-        this.regl.frame(() => {
-            this.regl.clear({
-                color: [0, 0, 0, 255],
-                depth: 1
-            })
-            draw()
+        // this.regl.frame(() => {
+        //     this.regl.clear({
+        //         color: [0, 0, 0, 255],
+        //         depth: 1
+        //     })
+        //     draw()
 
-            camera.tick()
-        })
+        //     camera.tick()
+        // })
+        draw()
     }
     render() {
         return (
